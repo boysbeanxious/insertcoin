@@ -1,0 +1,26 @@
+version: 0.2
+
+env:
+  variables:
+    AWS_DEFAULT_REGION: "us-east-1"
+    AWS_ACCOUNT_ID : "build"
+    IMAGE_REPO_NAME : "news"
+    IMAGE_TAG : "v1"
+phases:
+  pre_build:
+    commands:
+      - echo Logging into Amazon ECR...
+      - aws --region us-east-1 ecr get-login-password | docker login --username AWS --password-stdin 779959951984.dkr.ecr.us-east-1.amazonaws.com
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker-compose build
+  post_build:
+    commands:
+      - docker-compose push
+
+artifacts:
+  files:
+    - './**/*'

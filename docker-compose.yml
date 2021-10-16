@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  financialreport:
+    image: insertcoin/financialreport:v1
+    #image: 79959951984.dkr.ecr.us-east-1.amazonaws.com/financialreport:v1
+    build:
+      # 빌드 명령을 실행할 디렉터리 경로
+      context: ./financialreport
+      # 도커 이미지를 빌드하는데 사용할 도커파일
+      dockerfile: ./Dockerfile
+    command:
+      - python3
+      #- /app/financialreport/main.py
+      - ./financialreport/main.py
+    logging:
+      driver: awslogs
+      options: 
+        awslogs-group: insertcoin
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: finantialreport
+
+  stockdebate:
+    image: insertcoin/stockdebate:v1
+    #image: 79959951984.dkr.ecr.us-east-1.amazonaws.com/stockdebate:v1
+    build:
+      # 빌드 명령을 실행할 디렉터리 경로
+      context: ./stockdebate
+      # 도커 이미지를 빌드하는데 사용할 도커파일
+      dockerfile: ./Dockerfile
+    command:
+      - python3
+      #- /app/stockdebate/main.py
+      - ./stockdebate/main.py
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: insertcoin
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: stockdebate
+
+  news:
+    image: insertcoin/news:v1
+    #image: 779959951984.dkr.ecr.us-east-1.amazonaws.com/news:v1
+    build:
+      # 빌드 명령을 실행할 디렉터리 경로
+      context: ./news
+      # 도커 이미지를 빌드하는데 사용할 도커파일
+      dockerfile: ./Dockerfile
+    command:
+      - python3
+      #- /app/news/main.py
+      - ./stockdebate/main.py
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: insertcoin
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: news
