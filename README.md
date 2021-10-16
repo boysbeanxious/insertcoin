@@ -77,7 +77,10 @@ INSERT COIN을 구성하는 서비스는 크게 5가지로 볼수 있다.
 ![Web App Reference Architecture V2 (2)](https://user-images.githubusercontent.com/8296974/137591370-9e373aeb-f273-4b5b-aae6-8b4cdede6e0d.png)
 
  ## TO-DO LIST 
+twitter(혹은 SNS) 중 주가에 영향력이 있을 만한 대상 추가 선정 
+DB서버 이중화 
+머신러닝 서비스 구현 
+종목토론방 수집 시 발생하는 에러(네이버에서 지속적으로 데이터 수집시 timeout 발생시킴) 
+뉴스기사까지 수집가능한지 확인
 
- ## 트러블슈팅 
- 
- ## epilogue 
+ ## Epilogue 
