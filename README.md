@@ -83,4 +83,9 @@ DB서버 이중화
 종목토론방 수집 시 발생하는 에러(네이버에서 지속적으로 데이터 수집시 timeout 발생시킴) 
 뉴스기사까지 수집가능한지 확인
 
+## TroubleShooting
+. bulk data에 대한 python-posgresql 성능 분석한 블로그 
+
+[https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09](https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09)
+
  ## Epilogue 
