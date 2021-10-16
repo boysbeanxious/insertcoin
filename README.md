@@ -53,7 +53,7 @@ INSERT COIN을 구성하는 서비스는 크게 4가지로 볼수 있다.
 3. Database
 	: 위 수집한 정보를 저장하는 DBMS이다. 
 	: 하나의 DBMS에 수집정보에 따라 테이블을 분리하였고 기준정보가 되는 테이블 앞에 m_를 인터페이스 테이블 앞에 if_f를 붙여 관리하고 있다.
-![0F8A49BB-89AA-4E9F-9D2E-07CFB9B9D9D8_1_105_c](https://user-images.githubusercontent.com/8296974/137590429-4f7a2c76-74af-4a27-a0b0-5dbe917c26d6.jpeg)
+![0F8A49BB-89AA-4E9F-9D2E-07CFB9B9D9D8_1_105_c](https://user-images.githubusercontent.ccom/8296974/137590429-4f7a2c76-74af-4a27-a0b0-5dbe917c26d6.jpeg)
 
 4. Machine Learning Service 
 	: Crawling Service 를 통해 적재된 데이터를 기준으로 해당 일자 별 가장 시가와 종가의 등락폭이 높은 순위대로 10종목을 선정한다. 
@@ -64,8 +64,19 @@ INSERT COIN을 구성하는 서비스는 크게 4가지로 볼수 있다.
 	: AWS Codepipeline을 이용하여 형상관리는 물론 배포까지 신속하고 안정적
 
 ### 3-dpeth : 인프라 구성도 
-![Web App Reference Architecture V2](https://user-images.githubusercontent.com/8296974/137578666-bcf63434-2833-4343-a8d0-ad514655a4ea.png)
+1. CodePipeline을 이용한 dev/ops 구현
+	: AWS의 CodePipeline 서비스를 사용하여 개발한 소스 반영과 동시에 build/deploy 된다.
+2. docker-compose를 이용한 MSA 구성
+	: 하나의 crawling service 에 문제가 있다고 하더라도 서로 영향이 가지 않도록, docker-compose를 이용하여 데이터 수집 사이트 별로 서비스를 구동하였다. 
+3. Service 종류에 맞는 AWS 서버 구성 
+	: 증권사의 경우 해당 API 수행을 위해서는 로그인이 필요한데 로그인시 공인인증서를 요구하기 때문에, 서버 구성 시 S3에 저장, EC2(Window)에 배포 되도록 하였다. 
+	: 이외 수집되는 데이터의 경우 docker기반으로 구성하였기 때문에, 서버 구성 시ECR에 저장 ECS에 배포 되도록 하였다. 
+4. postgreSQL을 이용한 DBMS 구성
+	: RDBMS 중 확장성이 뛰어나고 오픈소스라는 점은 물론 속도가 필요한 분석 응용 프로그램에 적합하여 postgreSQL로 DBMS를 구성하였다.
+![Web App Reference Architecture V2 (2)](https://user-images.githubusercontent.com/8296974/137591370-9e373aeb-f273-4b5b-aae6-8b4cdede6e0d.png)
 
  ## TO-DO LIST 
-	- [ ] 주요구현기능 
-	- [ ] 트러블슈팅 
+
+ ## 트러블슈팅 
+ 
+ ## epilogue 
