@@ -52,8 +52,16 @@ INSERT COIN을 구성하는 서비스는 크게 4가지로 볼수 있다.
 		. 종목별 일자별 시가/종가 수집
 3. Database
 	: 위 수집한 정보를 저장하는 DBMS이다. 
-	: 하나의 DBMS에 수집정보에 따라 테이블을 분리하였다. 
+	: 하나의 DBMS에 수집정보에 따라 테이블을 분리하였고 기준정보가 되는 테이블 앞에 m_를 인터페이스 테이블 앞에 if_f를 붙여 관리하고 있다.
+	![0F8A49BB-89AA-4E9F-9D2E-07CFB9B9D9D8_1_105_c](https://user-images.githubusercontent.com/8296974/137589344-f8191c51-1eea-4de8-afad-cd86eaeae9ae.jpeg)
+
+4. Machine Learning Service 
+	: Crawling Service 를 통해 적재된 데이터를 기준으로 해당 일자 별 가장 시가와 종가의 등락폭이 높은 순위대로 10종목을 선정한다. 
+	: 증권사 Crawler를 통해 수집된 데이터와 등락폭이 높은 순위와 비교하여 어떤 매체가 가장 영향력을 발휘하는지 확인한다. 
 	
+5. CI/CD
+	: 위 서비스가 유기적으로 개발/운영될 수 있도록 CI/CD 서비스를 구성하였다.
+	: AWS Codepipeline을 이용하여 형상관리는 물론 배포까지 신속하고 안정적
 
 ### 3-dpeth : 인프라 구성도 
 ![Web App Reference Architecture V2](https://user-images.githubusercontent.com/8296974/137578666-bcf63434-2833-4343-a8d0-ad514655a4ea.png)
