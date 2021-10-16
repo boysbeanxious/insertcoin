@@ -35,25 +35,26 @@ client side 없이 Server 기준으로 처리하기 때문에 프로세스 흐�
 주변 사람들의 대회 속에서 가장 많이 등장하는 매체를 기준으로 데이터를 수집하고 분석한 다음 실제 주가 정보와 비교하여 해당 매체의 정보가 유의미 한지 분석한다. 
 ![insertcoin_프로세스흐름@1 600000023841858x (2)](https://user-images.githubusercontent.com/8296974/137586747-69040ce9-f767-4d1c-bad5-28d547a560fe.png)
 ### 2-depth : 서비스 구성도 
-INSERT COIN을 구성하는 서비스는 크게 4가지로 볼수 있다. 
-![insertcoin_서비스흐름도도@1 600000023841858x](https://user-images.githubusercontent.com/8296974/137577168-2c223b97-30d3-453d-bb15-843417c28709.png)
+INSERT COIN을 구성하는 서비스는 크게 5가지로 볼수 있다. 
+![export 3](https://user-images.githubusercontent.com/8296974/137592016-b56d31c6-db24-4a00-ae87-f5bfcebd8b39.png)
 
-1. Crowling Service 
+1. API Service
+	: 기준정보가 되는 종목 코드 및 실시간 주가 정보 확인을 위하여 증권사 데이터를 수집하는 서비스이다. 
+	: 현재까지 구현된 것은 아래와 같다. 
+		. 종목코드/섹터 수집
+		. 종목별 일자별 시가/종가 수집
+
+2. Crowling Service 
 	: 주가에 영향을 미칠것이라고 예상 되는 매체 세가지를 우선적으로 뽑아서 데이터 수집하는 서비스이다. 
 	: 현재까지 구현된 것은 아래와 같다. 
 		. 일자별 각 분야 별 랭킹뉴스 top 50(데이터 수집 사이트 : Nate)
 		. 종목토론방(데이터 수집 사이트 : naver)
 		. 기업 재무제표정보(데이터 수집 사이트 : naver)
 
-2. Crowling Service
-	: 기준정보가 되는 종목 코드 및 실시간 주가 정보 확인을 위하여 증권사 데이터를 수집하는 서비스이다. 
-	: 현재까지 구현된 것은 아래와 같다. 
-		. 종목코드/섹터 수집
-		. 종목별 일자별 시가/종가 수집
 3. Database
 	: 위 수집한 정보를 저장하는 DBMS이다. 
 	: 하나의 DBMS에 수집정보에 따라 테이블을 분리하였고 기준정보가 되는 테이블 앞에 m_를 인터페이스 테이블 앞에 if_f를 붙여 관리하고 있다.
-![0F8A49BB-89AA-4E9F-9D2E-07CFB9B9D9D8_1_105_c](https://user-images.githubusercontent.ccom/8296974/137590429-4f7a2c76-74af-4a27-a0b0-5dbe917c26d6.jpeg)
+![0F8A49BB-89AA-4E9F-9D2E-07CFB9B9D9D8_1_105_c](https://user-images.githubusercontent.com/8296974/137590429-4f7a2c76-74af-4a27-a0b0-5dbe917c26d6.jpeg)
 
 4. Machine Learning Service 
 	: Crawling Service 를 통해 적재된 데이터를 기준으로 해당 일자 별 가장 시가와 종가의 등락폭이 높은 순위대로 10종목을 선정한다. 
