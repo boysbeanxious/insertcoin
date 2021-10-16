@@ -29,6 +29,8 @@
     
 ## 서비스구성도 
   1depth  : 프로세스 흐름도
+  ![insertcoin_프로세스흐름@1 600000023841858x](https://user-images.githubusercontent.com/8296974/137575676-690981cc-dfe7-4829-9b9e-6e62e79e25da.png)
+
   2depth : 서비스 구성도 
   3dpeth : 서버레벨 
   
