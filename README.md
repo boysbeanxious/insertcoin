@@ -53,7 +53,7 @@ INSERT COIN을 구성하는 서비스는 크게 4가지로 볼수 있다.
 3. Database
 	: 위 수집한 정보를 저장하는 DBMS이다. 
 	: 하나의 DBMS에 수집정보에 따라 테이블을 분리하였고 기준정보가 되는 테이블 앞에 m_를 인터페이스 테이블 앞에 if_f를 붙여 관리하고 있다.
-![insertcoindb](https://user-images.githubusercontent.com/8296974/137590352-e62a5f16-fbf6-4868-b8e7-04298e47b299.png)
+![0F8A49BB-89AA-4E9F-9D2E-07CFB9B9D9D8_1_105_c](https://user-images.githubusercontent.com/8296974/137590429-4f7a2c76-74af-4a27-a0b0-5dbe917c26d6.jpeg)
 
 4. Machine Learning Service 
 	: Crawling Service 를 통해 적재된 데이터를 기준으로 해당 일자 별 가장 시가와 종가의 등락폭이 높은 순위대로 10종목을 선정한다. 
