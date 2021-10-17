@@ -99,7 +99,7 @@ insert coin을 구성하는 서비스는 크게 5가지로 볼수 있다.
 >: 이외 수집되는 데이터의 경우 docker기반으로 구성하였기 때문에, 인프라 구성 시 ECR에 저장 ECS에 배포 되도록 하였다.  
 
 **✔️ 4. postgreSQL을 이용한 DBMS 구성**  
->: RDBMS 중 확장성이 뛰어나고 오픈소스라는 점은 물론 속도가 필요한 분석 응용 프로그램에 적합하여 postgreSQL로 DBMS를 구성하였다.  
+>: RDBMS 중 확장성이 뛰어나고 오픈소스이며 속도가 빨라 데이터 분석 응용 프로그램에 적합다는 점에서 postgreSQL로 DBMS를 구성하였다.  
 
 ![Web App Reference Architecture V2 (2)](https://user-images.githubusercontent.com/8296974/137591370-9e373aeb-f273-4b5b-aae6-8b4cdede6e0d.png)
 
