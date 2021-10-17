@@ -40,7 +40,7 @@ client side 없이 Server 기준으로 처리하기 때문에 프로세스 흐�
 주변 사람들의 대회 속에서 가장 많이 등장하는 매체를 기준으로 데이터를 수집하고 분석한 다음 실제 주가 정보와 비교하여 해당 매체의 정보가 유의미 한지 분석한다.  
 ![insertcoin_프로세스흐름@1 600000023841858x (2)](https://user-images.githubusercontent.com/8296974/137586747-69040ce9-f767-4d1c-bad5-28d547a560fe.png)
 ### 📍 2-depth : 서비스 구성도 
-INSERT COIN을 구성하는 서비스는 크게 5가지로 볼수 있다. 
+insert coin을 구성하는 서비스는 크게 5가지로 볼수 있다. 
 ![export 3](https://user-images.githubusercontent.com/8296974/137592016-b56d31c6-db24-4a00-ae87-f5bfcebd8b39.png)
 
 **✔️ 1. API Service**  
