@@ -51,10 +51,13 @@ insert coin을 구성하는 서비스는 크게 5가지로 볼수 있다.
 
 **✔️ 2. Crawling Service** 
 >: 주가에 영향을 미칠것이라고 예상 되는 매체 세가지를 우선적으로 뽑아서 데이터 수집하는 서비스이다.  
->: 현재까지 구현된 것은 아래와 같다.  
->>. 일자별 각 분야 별 랭킹뉴스 top 50(데이터 수집 사이트 : https://news.nate.com/rank/interest)  
->>. 종목토론방(데이터 수집 사이트 : https://finance.naver.com/item/board.nhn)  
->>. 기업 재무제표정보(데이터 수집 사이트 : https://finance.naver.com/item/main.nhn)  
+>: 현재까지 구현된 것은 아래와 같다. 
+ 
+|서비스 종류 |데이터 수집 사이트|
+|------|---|
+|일자별 각 분야 별 랭킹뉴스 top 50|https://news.nate.com/rank/interest|
+|종목토론방 글 |https://finance.naver.com/item/board.nhn||
+|기업 재무제표정보|데이터 수집 사이트 : https://finance.naver.com/item/main.nhn|
 
 **✔️ 3. Database** 
 >: API와 crawling Service에서 수집한 정보를 저장하는 DBMS이다.  
