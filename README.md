@@ -89,10 +89,11 @@ insert coin을 구성하는 서비스는 크게 5가지로 볼수 있다.
 
 |Micro Service 종류|설명|
 |------|---|
-|NEWS|종목토방 수집 서비스|
+|NEWS|일자별 뉴스 수집 서비스|
 |finantialreport|재무제표 수집 서비스|
 |stockcode|신규 종목 수집 서비스|
 |stockreport|종목별 시가/종가 수집 서비스|
+|stockdebate|종목토론방 수집 서비스|
 
 **✔️ 3. Service 종류에 맞는 AWS 서버 구성**  
 >: 증권사의 경우 해당 API 수행을 위해서는 로그인이 필요한데 로그인시 공인인증서를 요구하기 때문에, 서버 구성 시 S3에 저장, EC2(Window)에 배포 되도록 하였다.  
@@ -118,7 +119,7 @@ insert coin을 구성하는 서비스는 크게 5가지로 볼수 있다.
 ## 7️⃣ Reference
 . bulk data에 대한 python-posgresql 성능 분석한 블로그  
 [https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09](https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09)  
-. 파이썬 docker 이미지 생성
-[Docker 로 내가 원하는 이미지 만들기](https://zesow.github.io/docker-로-내가-원하는-이미지-만들기/)
-. buildspec.yml ecr 접속 불가 해결. 
+. 파이썬 docker 이미지 생성  
+[Docker 로 내가 원하는 이미지 만들기](https://zesow.github.io/docker-로-내가-원하는-이미지-만들기/)  
+. buildspec.yml ecr 접속 불가 해결  
 [프라이빗 레지스트리 인증](https://docs.aws.amazon.com/ko_kr/AmazonECR/latest/userguide/registry_auth.html). 
