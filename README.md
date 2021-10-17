@@ -43,18 +43,18 @@ client side 없이 Server 기준으로 처리하기 때문에 프로세스 흐�
 INSERT COIN을 구성하는 서비스는 크게 5가지로 볼수 있다. 
 ![export 3](https://user-images.githubusercontent.com/8296974/137592016-b56d31c6-db24-4a00-ae87-f5bfcebd8b39.png)
 
-**✔️ 1. API Service**
-    : 기준정보가 되는 종목 코드 및 실시간 주가 정보 확인을 위하여 증권사 데이터를 수집하는 서비스이다.  
-    : 현재까지 구현된 것은 아래와 같다.  
+**✔️ 1. API Service**  
+    	+ 기준정보가 되는 종목 코드 및 실시간 주가 정보 확인을 위하여 증권사 데이터를 수집하는 서비스이다.
+    : 현재까지 구현된 것은 아래와 같다.
         . 종목코드/섹터 수집  
         . 종목별 일자별 시가/종가 수집  
 
 **✔️ 2. Crawling Service** 
 	: 주가에 영향을 미칠것이라고 예상 되는 매체 세가지를 우선적으로 뽑아서 데이터 수집하는 서비스이다.  
 	: 현재까지 구현된 것은 아래와 같다.  
-		. 일자별 각 분야 별 랭킹뉴스 top 50(데이터 수집 사이트 : nate)  
-		. 종목토론방(데이터 수집 사이트 : naver)  
-		. 기업 재무제표정보(데이터 수집 사이트 : naver)  
+	. 일자별 각 분야 별 랭킹뉴스 top 50(데이터 수집 사이트 : nate)  
+	. 종목토론방(데이터 수집 사이트 : naver)  
+	. 기업 재무제표정보(데이터 수집 사이트 : naver)  
 
 **✔️ 3. Database** 
 	: API와 crawling Service에서 수집한 정보를 저장하는 DBMS이다.  
@@ -64,34 +64,42 @@ INSERT COIN을 구성하는 서비스는 크게 5가지로 볼수 있다.
 
 **✔️ 4. Machine Learning Service**
 	: API Service 를 통해 적재된 데이터를 기준으로 해당 일자 별 시가와 종가의 등락폭이 높은 순위대로 10종목을 선정한다.  
-	: 증권사 Crawler를 통해 수집된 데이터와 등락폭이 높은 순위와 비교하여 어떤 매체가 가장 영향력을 발휘하는지 확인한다.  
+	: 증권사 Crawler를 통해 수집된 데이터와 등락폭이 높은 순위와 비교하여 어떤 매체가 가장 영향력을 발휘하는지 일자별로 확인하여 저장한다. (예상 사용 알고리즘 : 주성분분석)
+	: 1년치 데이터를 기준으로 확인하였을때 가장 영향력있는 매채를 선별한다. 
 	
-✔️ 5. CI/CD  
+**✔️ 5. CI/CD**
 	: 위 서비스가 유기적으로 개발/운영될 수 있도록 CI/CD 서비스를 구성하였다.  
-	: AWS Codepipeline을 이용하여 형상관리는 물론 배포까지 신속하고 안정적
+	: AWS Codepipeline을 이용하여 형상관리에서부터 배포까지 관리한다. 
 
 ### 📍 3-dpeth : 인프라 구성도 
-1. CodePipeline을 이용한 dev/ops 구현
+**✔️ 1. CodePipeline을 이용한 dev/ops 구현** 
 	: AWS의 CodePipeline 서비스를 사용하여 개발한 소스 반영과 동시에 build/deploy 된다.
-2. docker-compose를 이용한 MSA 구성
-	: 하나의 crawling service 에 문제가 있다고 하더라도 서로 영향이 가지 않도록, docker-compose를 이용하여 데이터 수집 사이트 별로 서비스를 구동하였다. 
-3. Service 종류에 맞는 AWS 서버 구성 
+	: CodePipeline에 연결한 서비스는 CodeCommit(형상관리), CodeBuild(소스빌드), CodeDeploy(빌드파일반영) 로 구성되어있다. 
+		. CodeCommit은 git을 기반으로 만들어진 서비스이다. 
+		. CodeBuild 시 Crawling Service의 경우 docker-compose명령어를, API서비스의 경우 pyinstaller를 사용하여 각각의 의 소스를 빌드한다.
+		. CodeDeploy 시 Crawling Service의 경우 ecs에 , API서비스의 경우 ec2에 빌드된 결과물을 배포 한다.
+**✔️ 2. docker-compose를 이용한 MSA 구성**
+	: 하나의 crawling service 에 문제가 있다고 하더라도 서로 영향이 가지 않도록 하기 위해 docker-compose를 이용하여 데이터 수집 사이트 별로 서비스를 구동하였다. 
+	: 현재 insertcoin에서 만든 MSA구성요소는 다음과 같다. 
+		. NEWS : 뉴스 정보 수집 서비스 
+		. stockdebate : 종목토롱방 수집 서비스
+		. finantialreport : 재무제표 수집 서비스
+		. stockcode : 신규 종목 수집 서비스 
+		. stockreport : 종목별 시가/종가 수집 서비스 
+**✔️ 3. Service 종류에 맞는 AWS 서버 구성** 
 	: 증권사의 경우 해당 API 수행을 위해서는 로그인이 필요한데 로그인시 공인인증서를 요구하기 때문에, 서버 구성 시 S3에 저장, EC2(Window)에 배포 되도록 하였다. 
-	: 이외 수집되는 데이터의 경우 docker기반으로 구성하였기 때문에, 서버 구성 시ECR에 저장 ECS에 배포 되도록 하였다. 
-4. postgreSQL을 이용한 DBMS 구성
+	: 이외 수집되는 데이터의 경우 docker기반으로 구성하였기 때문에, 인프라 구성 시 ECR에 저장 ECS에 배포 되도록 하였다. 
+**✔️ 4. postgreSQL을 이용한 DBMS 구성**
 	: RDBMS 중 확장성이 뛰어나고 오픈소스라는 점은 물론 속도가 필요한 분석 응용 프로그램에 적합하여 postgreSQL로 DBMS를 구성하였다.
 ![Web App Reference Architecture V2 (2)](https://user-images.githubusercontent.com/8296974/137591370-9e373aeb-f273-4b5b-aae6-8b4cdede6e0d.png)
 
- ## TO-DO LIST 
+## 6️⃣ TO-DO LIST 
 twitter(혹은 SNS) 중 주가에 영향력이 있을 만한 대상 추가 선정 
 DB서버 이중화 
 머신러닝 서비스 구현 
 종목토론방 수집 시 발생하는 에러(네이버에서 지속적으로 데이터 수집시 timeout 발생시킴) 
 뉴스기사까지 수집가능한지 확인
 
-## TroubleShooting
+## 7️⃣ Reference
 . bulk data에 대한 python-posgresql 성능 분석한 블로그 
-
 [https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09](https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09)
-
- ## Epilogue 
