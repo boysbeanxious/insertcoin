@@ -52,9 +52,9 @@ INSERT COIN을 구성하는 서비스는 크게 5가지로 볼수 있다.
 **✔️ 2. Crawling Service** 
 >: 주가에 영향을 미칠것이라고 예상 되는 매체 세가지를 우선적으로 뽑아서 데이터 수집하는 서비스이다.  
 >: 현재까지 구현된 것은 아래와 같다.  
->>. 일자별 각 분야 별 랭킹뉴스 top 50(데이터 수집 사이트 : nate)  
->>. 종목토론방(데이터 수집 사이트 : naver)  
->>. 기업 재무제표정보(데이터 수집 사이트 : naver)  
+>>. 일자별 각 분야 별 랭킹뉴스 top 50(데이터 수집 사이트 : https://news.nate.com/rank/interest)  
+>>. 종목토론방(데이터 수집 사이트 : https://finance.naver.com/item/board.nhn)  
+>>. 기업 재무제표정보(데이터 수집 사이트 : https://finance.naver.com/item/main.nhn)  
 
 **✔️ 3. Database** 
 >: API와 crawling Service에서 수집한 정보를 저장하는 DBMS이다.  
@@ -110,5 +110,9 @@ INSERT COIN을 구성하는 서비스는 크게 5가지로 볼수 있다.
 - [ ] DB서버 이중화 
 
 ## 7️⃣ Reference
-. bulk data에 대한 python-posgresql 성능 분석한 블로그 
-[https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09](https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09)
+. bulk data에 대한 python-posgresql 성능 분석한 블로그  
+[https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09](https://medium.com/analytics-vidhya/part-4-pandas-dataframe-to-postgresql-using-python-8ffdb0323c09)  
+. 파이썬 docker 이미지 생성
+[Docker 로 내가 원하는 이미지 만들기](https://zesow.github.io/docker-로-내가-원하는-이미지-만들기/)
+. buildspec.yml ecr 접속 불가 해결. 
+[프라이빗 레지스트리 인증](https://docs.aws.amazon.com/ko_kr/AmazonECR/latest/userguide/registry_auth.html). 
