@@ -56,7 +56,7 @@ insert coin을 구성하는 서비스는 크게 5가지로 볼수 있다.
 |서비스 종류 |데이터 수집 사이트|
 |------|---|
 |일자별 각 분야 별 랭킹뉴스 top 50|https://news.nate.com/rank/interest|
-|종목토론방 글 |https://finance.naver.com/item/board.nhn||
+|종목토론방 글 |https://finance.naver.com/item/board.nhn|
 |기업 재무제표정보|데이터 수집 사이트 : https://finance.naver.com/item/main.nhn|
 
 **✔️ 3. Database** 
@@ -84,12 +84,15 @@ insert coin을 구성하는 서비스는 크게 5가지로 볼수 있다.
   
 **✔️ 2. docker-compose를 이용한 MSA 구성**  
 >: 하나의 crawling service 에 문제가 있다고 하더라도 서로 영향이 가지 않도록 하기 위해 docker-compose를 이용하여 데이터 수집 사이트 별로 서비스를 구동하였다.  
->: 현재 insertcoin에서 만든 MSA구성요소는 다음과 같다.  
->>. NEWS : 뉴스 정보 수집 서비스  
->>. stockdebate : 종목토롱방 수집 서비스  
->>. finantialreport : 재무제표 수집 서비스  
->>. stockcode : 신규 종목 수집 서비스  
->>. stockreport : 종목별 시가/종가 수집 서비스  
+>: insert coin의 MSA를 구성하는 서비스 종류는 아래와 같다.
+
+
+|Micro Service 종류|설명|
+|------|---|
+|NEWS|종목토방 수집 서비스|
+|finantialreport|재무제표 수집 서비스|
+|stockcode|신규 종목 수집 서비스|
+|stockreport|종목별 시가/종가 수집 서비스|
 
 **✔️ 3. Service 종류에 맞는 AWS 서버 구성**  
 >: 증권사의 경우 해당 API 수행을 위해서는 로그인이 필요한데 로그인시 공인인증서를 요구하기 때문에, 서버 구성 시 S3에 저장, EC2(Window)에 배포 되도록 하였다.  
